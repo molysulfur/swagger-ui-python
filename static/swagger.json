@@ -1,0 +1,169 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "sean",
+      "version": "1.0.0",
+      "title": "Demo Swagger",
+      "contact": {
+        "email": "seanwasere@gmail.com"
+      },
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "servers": [
+      {
+        "url": "/"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Partner Request",
+        "description": "Demo API Request"
+      }
+    ],
+    "paths" : {
+      "/partners" :{
+        "parameters":[{
+          "name":"X-API-Key",
+          "in" : "header",
+          "required": true,
+          "type":"apiKey"
+        }],
+        "tags": [
+          "Partner Request"
+        ],
+        "get" : {
+          "parameters":[{
+            "name":"X-API-Key",
+            "in" : "header",
+            "required": true,
+            "type":"apiKey" ,
+            "schema" :{
+              "type": "string"
+            }
+          }],
+          "responses": {
+            "200": {
+              "schema": {
+                "$ref": "#/components/schemas/Partners"
+              }
+            }
+          }
+        }
+      },
+      "/partner/{accountNumber}" :{
+        "parameters":[{
+          "name":"X-API-Key",
+          "in" : "header",
+          "required": true,
+          "type":"apiKey"
+        },{
+          "name":"accountNumber",
+          "in" : "path",
+          "required": true,
+          "type":"integer"
+        }],
+        "tags": [
+          "Partner Request"
+        ],
+        "get" : {
+          "parameters":[{
+            "name":"X-API-Key",
+            "in" : "header",
+            "required": true,
+            "type":"apiKey" ,
+            "schema" :{
+              "type": "string"
+            }
+          },{
+            "name":"accountNumber",
+            "in" : "path",
+            "required": true,
+            "type":"integer" ,
+            "schema" :{
+              "type": "integer"
+            }
+          }],
+          "responses": {
+            "200": {
+              "schema": {
+                "$ref": "#/components/schemas/Partner"
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "securitySchemes" :{
+        "ApiKeyAuth" :{ 
+          "type" : "apiKey",
+          "in" : "header",
+          "name" : "X-API-KEY"
+        }
+      },
+      "schemas": {
+        "Partner":{
+          "type": "object",
+          "properties": {
+            "accountNumber": {
+              "properties": {
+                "uuid": {
+                  "type": "integer"
+                }
+              }
+            },
+            "id": {
+              "properties": {
+                "uuid": {
+                  "type": "integer"
+                }
+              }
+            },
+            "date_joined": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "telephone": {
+              "type": "string"
+            },
+            "total_commission": {
+              "type": "integer"
+            },
+            "total_deposit": {
+              "type": "integer"
+            },
+            "total_withdrawal": {
+              "type": "integer"
+            }
+          }
+        },
+        "Partners":{
+          "type": "object",
+          "properties": {
+            "Partner": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/Partner"
+              }
+            }
+          }
+        } 
+        
+      }
+    }
+  }
